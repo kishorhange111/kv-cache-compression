@@ -82,8 +82,9 @@ The full B ∈ {64, 128, 256, 512} sweep is in `results/summary.md`.
    can't know that in advance.
 2. **Attention sinks are most of what makes eviction usable.** A plain sliding window of
    64 tokens reaches ppl 410. Keeping 4 initial tokens as well (StreamingLLM) brings it to
-   19. Among the eviction policies TOVA is consistently best, and it is the only one
-   that recovers some copying (10% at B = 512).
+   19. Among the eviction policies TOVA has the lowest perplexity for B ≤ 256 (H2O edges
+   it at B = 512, 7.68 vs 7.72), and it is the only one that recovers some copying (10% at
+   B = 512).
 3. **Quantization keeps the information.** 4-bit KV with keys quantized *per channel* uses
    30.7% of the memory, costs 0.03 ppl and keeps 97.2% copy accuracy. That is the same
    memory as a B = 256 eviction cache, which copies 0%.
