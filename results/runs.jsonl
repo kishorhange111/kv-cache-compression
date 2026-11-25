@@ -1,0 +1,22 @@
+{"name": "full", "budget": null, "ppl": 7.272873606610938, "copy_acc": 0.9761905074119568, "kv_mem_frac": 1.0, "seconds": 21.426162004470825}
+{"name": "window B=64", "budget": 64, "ppl": 410.14000034706226, "ppl_past_budget": 481.3050526175755, "copy_acc": 0.0, "kv_mem_frac": 0.0625, "seconds": 22.879639863967896}
+{"name": "window B=128", "budget": 128, "ppl": 211.20323591046562, "ppl_past_budget": 300.5838119885112, "copy_acc": 0.0, "kv_mem_frac": 0.125, "seconds": 22.363908052444458}
+{"name": "window B=256", "budget": 256, "ppl": 82.65069725743439, "ppl_past_budget": 151.37181345774852, "copy_acc": 0.0, "kv_mem_frac": 0.25, "seconds": 22.33011817932129}
+{"name": "window B=512", "budget": 512, "ppl": 14.846524941328033, "ppl_past_budget": 23.147332765082382, "copy_acc": 0.0, "kv_mem_frac": 0.5, "seconds": 21.35624933242798}
+{"name": "sink B=64", "budget": 64, "ppl": 18.975716012101557, "ppl_past_budget": 18.13891889336369, "copy_acc": 0.0, "kv_mem_frac": 0.0625, "seconds": 24.045745134353638}
+{"name": "sink B=128", "budget": 128, "ppl": 14.341650891727141, "ppl_past_budget": 13.893327534663566, "copy_acc": 0.0, "kv_mem_frac": 0.125, "seconds": 24.189575910568237}
+{"name": "sink B=256", "budget": 256, "ppl": 11.11550179915756, "ppl_past_budget": 10.421006985518066, "copy_acc": 0.0, "kv_mem_frac": 0.25, "seconds": 22.96856117248535}
+{"name": "sink B=512", "budget": 512, "ppl": 7.75994116569575, "ppl_past_budget": 6.3156289894356465, "copy_acc": 0.0, "kv_mem_frac": 0.5, "seconds": 22.111709356307983}
+{"name": "h2o B=64", "budget": 64, "ppl": 21.827167152756015, "ppl_past_budget": 21.060470595973005, "copy_acc": 0.0, "kv_mem_frac": 0.0625, "seconds": 24.355313062667847}
+{"name": "h2o B=128", "budget": 128, "ppl": 17.01127114623357, "ppl_past_budget": 16.886773712533774, "copy_acc": 0.0, "kv_mem_frac": 0.125, "seconds": 24.043089151382446}
+{"name": "h2o B=256", "budget": 256, "ppl": 11.637139891280867, "ppl_past_budget": 11.078342802556364, "copy_acc": 0.0019841270986944437, "kv_mem_frac": 0.25, "seconds": 23.396040439605713}
+{"name": "h2o B=512", "budget": 512, "ppl": 7.677110917455814, "ppl_past_budget": 6.181391054802793, "copy_acc": 0.0238095261156559, "kv_mem_frac": 0.5, "seconds": 21.97291660308838}
+{"name": "tova B=64", "budget": 64, "ppl": 18.591056214262508, "ppl_past_budget": 17.74694364620569, "copy_acc": 0.0, "kv_mem_frac": 0.0625, "seconds": 23.192963361740112}
+{"name": "tova B=128", "budget": 128, "ppl": 13.434999398907442, "ppl_past_budget": 12.894023215886675, "copy_acc": 0.0, "kv_mem_frac": 0.125, "seconds": 23.36321783065796}
+{"name": "tova B=256", "budget": 256, "ppl": 9.77041423505156, "ppl_past_budget": 8.773995314764475, "copy_acc": 0.0, "kv_mem_frac": 0.25, "seconds": 23.080737113952637}
+{"name": "tova B=512", "budget": 512, "ppl": 7.721778653628853, "ppl_past_budget": 6.253605982818414, "copy_acc": 0.101190485060215, "kv_mem_frac": 0.5, "seconds": 21.828091382980347}
+{"name": "int8 k-per-token", "budget": null, "ppl": 7.274509808492618, "copy_acc": 0.9761905074119568, "kv_mem_frac": 0.53125, "seconds": 28.292931079864502}
+{"name": "int4 k-per-token", "budget": null, "ppl": 7.786736271608626, "copy_acc": 0.9583333730697632, "kv_mem_frac": 0.28125, "seconds": 28.884435892105103}
+{"name": "int4 k-per-channel", "budget": null, "ppl": 7.30242254182809, "copy_acc": 0.9722222685813904, "kv_mem_frac": 0.3072916666666667, "seconds": 24.356756687164307}
+{"name": "int2 k-per-token", "budget": null, "ppl": 36.755543391574356, "copy_acc": 0.01388888992369175, "kv_mem_frac": 0.15625, "seconds": 28.77229142189026}
+{"name": "int2 k-per-channel", "budget": null, "ppl": 8.80474327297699, "copy_acc": 0.8829365372657776, "kv_mem_frac": 0.18418560606060605, "seconds": 24.264959573745728}
