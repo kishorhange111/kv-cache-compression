@@ -54,4 +54,40 @@ pytest -q                                         # 15 tests, CPU (tiny random G
 python -m kvc.evaluate --out results --device cuda
 ```
 
-**Results are pending** from the Colab run.
+## Results (Tesla T4; [`results/summary.md`](results/summary.md), raw rows in [`results/runs.jsonl`](results/runs.jsonl))
+
+GPT-2 (124M), 1,024 tokens, 8 sequences per task, held-out Python stdlib text. KV memory
+is relative to the full fp16 cache, and the quantized rows include scales.
+
+| cache | KV memory | ppl | ppl past budget | long-range copy |
+|---|---|---|---|---|
+| full | 100% | 7.27 | – | **97.6%** |
+| window B=64 / 512 | 6.2% / 50% | 410.14 / 14.85 | 481.31 / 23.15 | 0.0% / 0.0% |
+| sink B=64 / 512 | 6.2% / 50% | 18.98 / 7.76 | 18.14 / 6.32 | 0.0% / 0.0% |
+| H2O B=64 / 512 | 6.2% / 50% | 21.83 / 7.68 | 21.06 / 6.18 | 0.0% / 2.4% |
+| TOVA B=64 / 256 / 512 | 6.2% / 25% / 50% | 18.59 / 9.77 / 7.72 | 17.75 / 8.77 / 6.25 | 0.0% / 0.0% / 10.1% |
+| int8, keys per token | 53.1% | 7.27 | – | 97.6% |
+| int4, keys per token | 28.1% | 7.79 | – | 95.8% |
+| **int4, keys per channel** | **30.7%** | **7.30** | – | **97.2%** |
+| int2, keys per token | 15.6% | 36.76 | – | 1.4% |
+| **int2, keys per channel** | **18.4%** | **8.80** | – | **88.3%** |
+
+The full B ∈ {64, 128, 256, 512} sweep is in `results/summary.md`.
+
+1. **Perplexity hides what eviction loses.** At half the memory, sinks, H2O and TOVA all
+   come within 0.5 ppl of the full cache, and past the budget they even score *lower*
+   (6.2–6.3 vs 7.27), because those positions are later in the document and easier. Yet
+   all of them lose nearly the entire long-range copy (≤10% vs 97.6%). A token that was
+   unimportant when it was evicted can become essential later, and a score-based policy
+   can't know that in advance.
+2. **Attention sinks are most of what makes eviction usable.** A plain sliding window of
+   64 tokens reaches ppl 410. Keeping 4 initial tokens as well (StreamingLLM) brings it to
+   19. Among the eviction policies TOVA has the lowest perplexity for B ≤ 256 (H2O edges
+   it at B = 512, 7.68 vs 7.72), and it is the only one that recovers some copying (10% at
+   B = 512).
+3. **Quantization keeps the information.** 4-bit KV with keys quantized *per channel* uses
+   30.7% of the memory, costs 0.03 ppl and keeps 97.2% copy accuracy. That is the same
+   memory as a B = 256 eviction cache, which copies 0%.
+4. **Per-channel keys matter, as KIVI argues.** Key outliers sit in fixed channels, so a
+   per-token scale wastes its range. At 2 bits, per-channel keys give 8.80 ppl and 88.3%
+   copy, against 36.76 ppl and 1.4% per token.
